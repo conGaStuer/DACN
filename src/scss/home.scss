@@ -1,0 +1,473 @@
+$font: "Poppins", sans-serif;
+
+@mixin no-space() {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: $font;
+}
+.section-1 {
+  width: 100%;
+  height: 70vh;
+  background-color: black;
+  position: relative;
+  top: 70px;
+  img {
+    width: 750px;
+    height: 500px;
+    position: relative;
+    left: 700px;
+    top: -50px;
+  }
+  .introduce-1 {
+    width: 600px;
+    height: 200px;
+    position: relative;
+    top: -500px;
+    left: 200px;
+    color: white;
+    p {
+      font-size: 20px;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      top: 30px;
+    }
+    .span-1 {
+      position: relative;
+      top: 20px;
+    }
+    span {
+      font-size: 80px;
+      font-weight: bold;
+    }
+    h5 {
+      margin: 0;
+      padding: 0;
+    }
+    button {
+      width: 120px;
+      height: 40px;
+      background-color: black;
+      color: white;
+      border: 1px solid white;
+      font-weight: bold;
+      font-size: 12px;
+      position: relative;
+      top: 20px;
+      cursor: pointer;
+      transition: all 0.4s ease-in;
+      &:hover {
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+}
+.section-2 {
+  width: 95%;
+  height: 50vh;
+  background: rgb(208, 202, 192);
+  background: linear-gradient(
+    172deg,
+    rgba(208, 202, 192, 1) 0%,
+    rgba(92, 89, 84, 1) 100%
+  );
+  position: relative;
+  margin: 0 auto;
+  z-index: 2;
+  display: flex;
+  .section-2__1 {
+    width: 70%;
+    height: 100%;
+    background-image: url(../../assets/backgr1.png);
+    background-size: 100%;
+    background-position: center 10%;
+    transition: background-size 1s ease-in-out;
+    -webkit-transition: background-size 1s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background-size: 120%;
+    }
+    .introduce-2 {
+      width: 600px;
+      height: 250px;
+      position: relative;
+      top: 100px;
+      left: 120px;
+      color: white;
+      font-weight: bold;
+      p {
+        font-size: 18px;
+        letter-spacing: 2px;
+        @include no-space();
+      }
+      h5 {
+        font-size: 55px;
+        @include no-space();
+        letter-spacing: 3px;
+      }
+      button {
+        width: 120px;
+        height: 40px;
+        background-color: transparent;
+        color: white;
+        border: 1px solid white;
+        font-weight: bold;
+        font-size: 12px;
+        position: relative;
+        top: 20px;
+        cursor: pointer;
+        transition: all 0.4s ease-in;
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+  }
+
+  .section-2__2 {
+    width: 30%;
+    height: 100%;
+    background-color: bisque;
+    background-image: url(../../assets/camera.webp);
+    background-size: 100%;
+    background-position: center 10%;
+    transition: background-size 1s ease-in-out;
+    -webkit-transition: background-size 1s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background-size: 120%;
+    }
+    .introduce-3 {
+      width: 400px;
+      height: 250px;
+      position: relative;
+      top: 70px;
+      margin: 0 auto;
+      color: white;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      p {
+        font-size: 25px;
+        letter-spacing: 2px;
+        @include no-space();
+        font-weight: bold;
+      }
+      h5 {
+        font-size: 15px;
+        @include no-space();
+        letter-spacing: 3px;
+        text-align: center;
+        font-weight: normal;
+      }
+      button {
+        width: 120px;
+        height: 40px;
+        background-color: transparent;
+        color: white;
+        border: 1px solid white;
+        font-weight: bold;
+        font-size: 12px;
+        position: relative;
+        top: 20px;
+        cursor: pointer;
+        transition: all 0.4s ease-in;
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+  }
+}
+.section-3 {
+  width: 100%;
+  height: 150px;
+  position: relative;
+  top: 80px;
+  p {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .no-shadow {
+    width: 100%;
+    height: 100px;
+    .vueperslides__arrows svg {
+      color: #000;
+      position: relative;
+      top: -20px;
+    }
+    .vueperslide__content-wrapper {
+      background-color: rebeccapurple;
+    }
+    .cate-image {
+      height: 200px;
+      width: 100%;
+      background-size: cover;
+    }
+  }
+}
+.section-4 {
+  width: 100%;
+  height: 100vh;
+
+  position: relative;
+  top: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .grid-container {
+    width: 95%;
+    height: 95%;
+    display: grid;
+    gap: 20px;
+
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    .item {
+      width: 300px;
+      height: 325px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      .item-image {
+        width: 80%;
+        height: 65%;
+        position: relative;
+        top: 20px;
+        object-fit: cover;
+        background-size: cover;
+      }
+      .item-info {
+        width: 80%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .item-cate {
+          color: gray;
+          font-size: 12px;
+        }
+        .item-series {
+          color: #216fe6;
+          font-size: 15px;
+          font-weight: bold;
+          letter-spacing: 1px;
+        }
+        .item-price {
+          color: #ff4545;
+        }
+      }
+    }
+  }
+}
+.section-5 {
+  width: 100%;
+  height: 50vh;
+  background-color: rebeccapurple;
+  position: relative;
+  top: 250px;
+  width: 95%;
+  height: 50vh;
+  background: rgb(208, 202, 192);
+  background: linear-gradient(
+    172deg,
+    rgba(208, 202, 192, 1) 0%,
+    rgba(92, 89, 84, 1) 100%
+  );
+  position: relative;
+  margin: 0 auto;
+  z-index: 2;
+  display: flex;
+  .section-2__1 {
+    width: 50%;
+    height: 100%;
+    background-image: url(../../assets/intro.jpg);
+    background-size: 100%;
+    background-position: center 0%;
+    transition: background-size 1s ease-in-out;
+    -webkit-transition: background-size 1s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background-size: 120%;
+    }
+    .introduce-2 {
+      width: 600px;
+      height: 250px;
+      position: relative;
+      top: 100px;
+      left: 50px;
+      color: white;
+      font-weight: bold;
+      p {
+        font-size: 18px;
+        letter-spacing: 2px;
+        @include no-space();
+      }
+      h5 {
+        font-size: 55px;
+        @include no-space();
+        letter-spacing: 3px;
+      }
+      button {
+        width: 120px;
+        height: 40px;
+        background-color: transparent;
+        color: white;
+        border: 1px solid white;
+        font-weight: bold;
+        font-size: 12px;
+        position: relative;
+        top: 20px;
+        cursor: pointer;
+        transition: all 0.4s ease-in;
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+  }
+
+  .section-2__2 {
+    width: 50%;
+    height: 100%;
+    background-color: bisque;
+    background-image: url(../../assets/intro2.jpg);
+    background-size: 100%;
+    background-position: center 10%;
+    transition: background-size 1s ease-in-out;
+    -webkit-transition: background-size 1s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background-size: 120%;
+    }
+    .introduce-3 {
+      width: 400px;
+      height: 250px;
+      position: relative;
+      top: 70px;
+      margin: 0 auto;
+      color: white;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      p {
+        font-size: 25px;
+        letter-spacing: 2px;
+        @include no-space();
+        font-weight: bold;
+      }
+      h5 {
+        font-size: 15px;
+        @include no-space();
+        letter-spacing: 3px;
+        text-align: center;
+        font-weight: normal;
+      }
+      button {
+        width: 120px;
+        height: 40px;
+        background-color: transparent;
+        color: white;
+        border: 1px solid white;
+        font-weight: bold;
+        font-size: 12px;
+        position: relative;
+        top: 20px;
+        cursor: pointer;
+        transition: all 0.4s ease-in;
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+  }
+}
+.section-6 {
+  width: 95%;
+  height: 80px;
+  margin: 0 auto;
+  position: relative;
+  top: 300px;
+  background-color: aquamarine;
+  border-radius: 50px;
+  background-image: url(../../assets/backkk6.webp);
+  background-position: center 30%;
+  background-attachment: fixed;
+  background-size: 100%;
+  p {
+    @include no-space();
+    position: relative;
+    top: 25px;
+    right: -30px;
+    font-weight: bold;
+    color: aliceblue;
+    font-size: 20px;
+    i {
+      margin-right: 15px;
+    }
+  }
+  .subcribe {
+    width: 500px;
+    height: 50px;
+    float: right;
+    position: relative;
+    top: 15px;
+    right: 30px;
+    border-radius: 40px;
+    &::placeholder {
+      text-indent: 15px;
+      font-family: $font;
+    }
+  }
+  button {
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    float: right;
+    position: relative;
+    top: 22px;
+    right: -460px;
+    border: none;
+    background-color: #000;
+    color: white;
+    font-weight: bold;
+  }
+}
+.section-7 {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  top: 350px;
+  .brand-container {
+    width: 95%;
+    height: 70%;
+    position: relative;
+    top: 10px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    .brand {
+      width: 20%;
+      height: 100%;
+      border: 1px solid black;
+      background-size: cover;
+      cursor: pointer;
+    }
+  }
+}
