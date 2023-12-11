@@ -54,6 +54,6 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 @import "../../scss/contact.scss";
 </style>

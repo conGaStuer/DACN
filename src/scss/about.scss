@@ -1,0 +1,209 @@
+@mixin positions() {
+  position: relative;
+  top: 100px;
+}
+.direct {
+  width: 100%;
+  height: 10vh;
+  background-color: rgb(148, 150, 150);
+  position: relative;
+  top: 70px;
+  display: flex;
+  align-items: center;
+  background-image: url(../../assets/banner.webp);
+  a {
+    position: relative;
+    left: 40px;
+    margin-right: 15px;
+    text-decoration: none;
+    color: black;
+  }
+  span {
+    position: relative;
+    left: 35px;
+  }
+}
+.about-intro--text {
+  width: 100%;
+  height: 200px;
+  @include positions;
+  top: 70px;
+  text-align: center;
+  p {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    color: #f03333;
+    position: relative;
+    top: 10px;
+  }
+  h4 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 10px;
+  }
+  h5 {
+    font-weight: normal;
+  }
+}
+.about-video {
+  width: 100%;
+  height: 85vh;
+  position: relative;
+  top: 80px;
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.about-intro--text2 {
+  @include positions();
+  top: 100px;
+  width: 40%;
+  height: 150px;
+  margin: 0 auto;
+  font-weight: bold;
+  text-align: center;
+  span {
+    position: relative;
+    top: 20px;
+  }
+}
+.service {
+  @include positions();
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  .service-container {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .service-item {
+      width: 30%;
+      height: 90%;
+      border-top-right-radius: 50px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      i {
+        font-size: 80px;
+        color: #f03333;
+      }
+      h5 {
+        font-size: 25px;
+      }
+      span {
+        font-size: 12.2px;
+        text-align: center;
+      }
+    }
+  }
+}
+.personnel {
+  @include positions();
+  width: 100%;
+  height: 750px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+    top: 20px;
+  }
+  .personnel-container {
+    width: 90%;
+    height: 90%;
+    position: relative;
+    top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .personnel-item {
+      width: 30%;
+      height: 95%;
+      img {
+        width: 380px;
+        height: 450px;
+      }
+      .personnel-info {
+        width: 96.8%;
+        height: 100px;
+        background-color: rgba(125, 131, 134, 0.5);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: relative;
+        top: -215px;
+        i {
+          font-size: 45.2px;
+          color: white;
+        }
+      }
+    }
+  }
+}
+.question {
+  width: 100%;
+  height: 80vh;
+  @include positions();
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .question-image {
+    width: 35%;
+    height: 100%;
+    background-image: url(../../assets/question.webp);
+    background-size: cover;
+  }
+  .question-list {
+    width: 60%;
+    height: 100%;
+    position: relative;
+    left: -50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    p {
+      font-size: 45.14px;
+      font-weight: bold;
+      margin: 0;
+    }
+    .list {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 24%;
+      border: 1px solid gray;
+      border-radius: 80px;
+      i {
+        font-size: 80px;
+        color: #f03333;
+      }
+      .list-text {
+        h5 {
+          font-size: 20px;
+        }
+        span {
+          position: relative;
+          top: -30px;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
