@@ -1,0 +1,218 @@
+@mixin positions() {
+  position: relative;
+  top: 100px;
+}
+.direct {
+  width: 100%;
+  height: 10vh;
+  background-color: rgb(148, 150, 150);
+  position: relative;
+  top: 70px;
+  display: flex;
+  align-items: center;
+  background-image: url(../../src/assets/banner.webp);
+  a {
+    position: relative;
+    left: 40px;
+    margin-right: 15px;
+    text-decoration: none;
+    color: black;
+  }
+  span {
+    position: relative;
+    left: 35px;
+  }
+}
+.banner {
+  width: 95%;
+  height: 300px;
+  background-color: antiquewhite;
+  position: relative;
+  top: 100px;
+  margin: 0 auto;
+  background-image: url(../../src/assets/bannerShop.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center -20%;
+}
+.category {
+  width: 95%;
+  height: 240px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+  top: 150px;
+  .category-item {
+    width: 32%;
+    height: 95%;
+    border-radius: 20px;
+    border: 1px solid rgb(224, 218, 218);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .cate-item__image {
+      width: 35%;
+      height: 90%;
+      background-image: url(../../src/assets/acess.webp);
+      background-position: center;
+      background-size: cover;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+    .cate-item__image1 {
+      background-image: url(../../src/assets/ipad.webp);
+    }
+    .cate-item__image2 {
+      background-image: url(../../src/assets/phone.webp);
+    }
+    .cate-item__info {
+      width: 60%;
+      height: 90%;
+
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      p {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 0;
+      }
+      h5 {
+        font-weight: normal;
+      }
+      button {
+        width: 120px;
+        height: 40px;
+        border-radius: 20px;
+        border: 1px solid rgb(224, 218, 218);
+        background-color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+        &:hover {
+          background-color: #f03333;
+          color: aliceblue;
+        }
+        i {
+          color: #f03333;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+.products {
+  width: 95%;
+  height: auto;
+  margin: 0 auto;
+  min-height: 80vh;
+  position: relative;
+  top: 200px;
+  display: flex;
+  justify-content: space-between;
+  .filt-side {
+    width: 300px;
+    height: 70vh;
+    .filter-text {
+      width: 89.5%;
+      height: 40px;
+      border: 1px solid rgb(224, 218, 218);
+      span {
+        position: relative;
+        top: 10px;
+        left: 10px;
+      }
+    }
+    .filter-product {
+      width: 90%;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      .filter-product__item {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        border: 1px solid rgb(224, 218, 218);
+        button {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        span {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+  .products-side {
+    width: 80%;
+    height: auto;
+    min-height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 40px;
+    .products-item {
+      width: 240px;
+      height: 350px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid rgb(224, 218, 218);
+      cursor: pointer;
+      span {
+        width: 30px;
+        position: relative;
+        top: -200px;
+        font-size: 12px;
+        background-color: #f03333;
+        padding: 5px 10px;
+        color: white;
+        font-weight: bold;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+      .item-image {
+        width: 100%;
+        height: 75%;
+        background-size: cover;
+      }
+      .item-info {
+        width: 100%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .rating {
+          font-size: 10px;
+        }
+        .item-cate {
+          color: #242424;
+          font-size: 13.2px;
+        }
+        .item-name {
+          color: rgb(69, 69, 221);
+          font-size: 15.2px;
+          font-weight: bold;
+        }
+        .item-price {
+          color: #f03333;
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}
