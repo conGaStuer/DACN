@@ -167,7 +167,7 @@
     .products-item {
       width: 240px;
       height: 350px;
-
+      text-decoration: none;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -198,6 +198,7 @@
         justify-content: space-between;
         .rating {
           font-size: 10px;
+          color: rgb(237, 205, 19);
         }
         .item-cate {
           color: #242424;

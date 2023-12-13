@@ -1,0 +1,255 @@
+.direct {
+  width: 100%;
+  height: 10vh;
+  background-color: rgb(148, 150, 150);
+  position: relative;
+  top: 70px;
+  display: flex;
+  align-items: center;
+  background-image: url(../../src/assets/banner.webp);
+  a {
+    position: relative;
+    left: 40px;
+    margin-right: 15px;
+    text-decoration: none;
+    color: black;
+  }
+  span {
+    position: relative;
+    left: 35px;
+  }
+}
+.product-side {
+  width: 95%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  top: 125.2261px;
+  .product-image {
+    width: 45%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgb(222, 216, 216);
+    border-radius: 5px;
+  }
+  .product-info {
+    width: 50%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .product-name {
+      width: 100%;
+      height: 30px;
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .product-rating {
+      width: 100%;
+      height: 30px;
+      font-size: 12px;
+      position: relative;
+      top: -5px;
+      i {
+        color: rgb(234, 223, 12);
+      }
+      span {
+        color: rgb(228, 80, 12);
+      }
+    }
+    .product-price {
+      width: 100%;
+      height: 30px;
+      font-size: 25px;
+      font-weight: bold;
+      position: relative;
+      top: -40px;
+    }
+
+    .product-spec {
+      width: 100%;
+      height: 190px;
+      position: relative;
+      top: -50px;
+      font-size: 14px;
+      border-top: 1px solid rgb(216, 220, 220);
+      span {
+        color: rgb(228, 80, 12);
+        font-weight: bold;
+      }
+      ul li::before {
+        content: "\2022";
+        color: rgb(228, 80, 12);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+    }
+    .product-handle {
+      width: 100%;
+      height: 80px;
+      position: relative;
+      top: -40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgb(216, 220, 220);
+      button {
+        width: 250px;
+        height: 50px;
+        background-color: rgb(228, 80, 12);
+        border: none;
+        border-radius: 40px;
+        color: white;
+        font-weight: bold;
+        font-size: 17px;
+        position: relative;
+        top: 30px;
+        cursor: pointer;
+        i {
+          margin-right: 10px;
+        }
+      }
+      .add {
+        background-color: black;
+      }
+      .buy {
+        position: relative;
+        left: -170px;
+      }
+    }
+    .something {
+      width: 100%;
+      height: 140px;
+      border-top: 1px solid rgb(216, 220, 220);
+      font-size: 14px;
+      span {
+        color: rgb(228, 80, 12);
+        font-weight: bold;
+      }
+      i {
+        font-size: 30px;
+        margin-right: 15px;
+      }
+      .fa-facebook {
+        color: rgb(39, 39, 198);
+      }
+      .fa-pinterest {
+        color: rgb(228, 80, 12);
+      }
+      .fa-telegram {
+        color: rgb(36, 158, 230);
+      }
+    }
+  }
+}
+.relate-image {
+  position: relative;
+  top: 250px;
+  width: 95%;
+  height: 160vh;
+  margin: 0 auto;
+
+  .middle-banner {
+    width: 100%;
+    height: 90vh;
+    background-image: url(../../src/assets/xiaomi-banner.jpg);
+    margin-bottom: 10vh;
+    background-size: cover;
+    background-position: center;
+  }
+  .left-banner {
+    width: 48%;
+    height: 60vh;
+    float: left;
+    background-image: url(../../src/assets/left-banner.jpg);
+    background-size: cover;
+    background-position: left;
+  }
+  .right-banner {
+    width: 48%;
+    height: 60vh;
+    float: right;
+    background-image: url(../../src/assets/right-banner.webp);
+    background-size: cover;
+    background-position: left;
+  }
+}
+.rela {
+  position: relative;
+  top: 300px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  border-bottom: 1px solid rgb(216, 220, 220);
+  padding-bottom: 50px;
+}
+.relate-product {
+  width: 95%;
+  height: 50vh;
+  position: relative;
+  top: 400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 186.612px;
+
+  .products-item {
+    width: 250px;
+    height: 350px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid rgb(224, 218, 218);
+    cursor: pointer;
+    span {
+      width: 30px;
+      position: relative;
+      top: -200px;
+      font-size: 12px;
+      background-color: #f03333;
+      padding: 5px 10px;
+      color: white;
+      font-weight: bold;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    .item-image {
+      width: 100%;
+      height: 75%;
+      background-size: cover;
+    }
+    .item-info {
+      width: 100%;
+      height: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .rating {
+        font-size: 10px;
+        color: rgb(237, 205, 19);
+      }
+      .item-cate {
+        color: #242424;
+        font-size: 13.2px;
+      }
+      .item-name {
+        color: rgb(69, 69, 221);
+        font-size: 15.2px;
+        font-weight: bold;
+      }
+      .item-price {
+        color: #f03333;
+        font-size: 17px;
+      }
+    }
+  }
+}
