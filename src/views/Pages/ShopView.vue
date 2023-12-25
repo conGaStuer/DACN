@@ -66,7 +66,7 @@
     <div class="products-side">
       <router-link
         class="products-item"
-        v-for="product in products"
+        v-for="product in filteredProducts"
         :key="product.masp"
         :to="{ name: 'productDetail', params: { id: product.masp } }"
       >

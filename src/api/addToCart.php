@@ -14,16 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $stmt->close();
 
         if ($result->num_rows > 0) {
-            // Product already exists in the cart, update the quantity
-            $stmt = $conn->prepare("UPDATE giohang SET soluong = soluong + 1 WHERE masp = ?");
+            // Product already exists in the cart, update the quantity and total price
+            $stmt = $conn->prepare("UPDATE giohang SET soluong = soluong + 1, tongtien = gia * (soluong + 1) WHERE masp = ?");
             $stmt->bind_param("s", $data->masp);
             $stmt->execute();
             $stmt->close();
             echo json_encode(array("message" => "Item quantity updated in cart."));
         } else {
             // Product doesn't exist in the cart, insert a new row
-            $stmt = $conn->prepare("INSERT INTO giohang (masp, tensp, hinhanh, gia, soluong) VALUES (?, ?, ?, ?, 1)");
-            $stmt->bind_param("ssss", $data->masp, $data->tensp, $data->hinhanh, $data->gia);
+            $stmt = $conn->prepare("INSERT INTO giohang (masp, tensp, hinhanh, gia, soluong, tongtien) VALUES (?, ?, ?, ?, 1, ?)");
+            $stmt->bind_param("ssssd", $data->masp, $data->tensp, $data->hinhanh, $data->gia, $data->gia);
             $stmt->execute();
             $stmt->close();
             echo json_encode(array("message" => "Item added to cart successfully."));

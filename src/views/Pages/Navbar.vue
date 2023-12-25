@@ -10,49 +10,64 @@
       </div>
 
       <ul>
-        <li><router-link to="/login"> Login </router-link></li>
+        <li>
+          <router-link v-if="!loggedUser" to="/login"> Login </router-link>
+          <span v-else @click="logout"> Logout </span>
+        </li>
         <li><i class="fa-solid fa-magnifying-glass"></i></li>
-        <li @click="showUser">
+        <li>
           <i class="fa-regular fa-user"></i>
         </li>
-        <li><i class="fa-solid fa-cart-shopping"></i></li>
+
+        <li>
+          <router-link to="/cart"
+            ><i class="fa-solid fa-cart-shopping"></i
+          ></router-link>
+        </li>
       </ul>
     </div>
   </nav>
-  <div class="test" v-if="userr">
-    <div>Hello,</div>
-    <div>My accout</div>
-    <div>Log out</div>
-  </div>
 </template>
 
 <script>
 import { onMounted, ref } from "vue";
 import axios from "axios";
+import router from "@/router";
+
 export default {
   setup() {
-    const userr = ref(false);
     const loggedUser = ref(null);
-    const showUser = () => {
-      userr.value = !userr.value;
-    };
+
     const checkLogin = () => {
       axios
-        .get("http://localhost/DACN/dacn-vuejs/src/api/api.php")
+        .get("http://localhost/dacn/src/api/checkLogin.php")
         .then((res) => {
           loggedUser.value = res.data.user;
-          console.log(res.data);
         })
         .catch((err) => console.error(err));
     };
+
+    const logout = () => {
+      axios
+        .post("http://localhost/dacn/src/api/logout.php")
+        .then((res) => {
+          if (res.data.message === "Logout successful") {
+            loggedUser.value = null;
+            // Redirect to the login page or another appropriate page
+            router.push({ name: "login" });
+          }
+        })
+        .catch((err) => console.error(err));
+    };
+
     onMounted(() => {
       checkLogin();
     });
+
     return {
-      userr,
-      showUser,
       loggedUser,
       checkLogin,
+      logout,
     };
   },
 };

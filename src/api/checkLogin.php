@@ -1,26 +1,14 @@
 <?php
-include(__DIR__ . "/config.php");
-// Start the session
 session_start();
 
-// Check if a user is logged in
+// Check if the user is logged in
 if (isset($_SESSION['user'])) {
-    // User is logged in
-    $response = array(
-        'user' => $_SESSION['user'],
-        'loggedIn' => true
-    );
+    $loggedIn = true;
+    $user = $_SESSION['user'];
 } else {
-    // User is not logged in
-    $response = array(
-        'user' => null,
-        'loggedIn' => false
-    );
+    $loggedIn = false;
+    $user = null;
 }
 
-// Set the content type header to application/json
-header('Content-Type: application/json');
-
-// Encode the response as JSON and output it
-echo json_encode($response);
+echo json_encode(array("loggedIn" => $loggedIn, "user" => $user));
 ?>

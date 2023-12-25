@@ -24,24 +24,21 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $inputUsername  = $data->username;
         $inputPassword = $data->password;
     
-        $stmt = $conn->prepare("SELECT * FROM khachhang where username = ? and password = ?");
+        $stmt = $conn->prepare("SELECT * FROM khachhang WHERE username = ? AND password = ?");
         $stmt->bind_param("ss", $inputUsername, $inputPassword);
         $stmt->execute();
         $result = $stmt->get_result();
         
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-
             
             $_SESSION['user'] = $user;
 
-            echo json_encode(array("message" => "Login successful.", "user" =>$_SESSION['user']));
+            echo json_encode(array("message" => "Login successful.", "user" => $_SESSION['user']));
         } else {
             echo json_encode(array("message" => "Invalid username or password."));
         }
-       
-    
-    
+        $stmt->close();
     }    
 }
 

@@ -1,19 +1,22 @@
+// userController.js
+
 import axios from "axios";
 import { onMounted, ref } from "vue";
+import router from "@/router"; // Import Vue Router
 
-import router from "@/router";
 const userController = () => {
   const username = ref("");
   const password = ref("");
   const users = ref([]);
   const errorLogin = ref("");
+
   onMounted(() => {
     fetchUser();
   });
 
   const fetchUser = () => {
     axios
-      .get("http://localhost/DACN/dacn-vuejs/src/api/api.php")
+      .get("http://localhost/dacn/src/api/api.php")
       .then((res) => {
         users.value = res.data;
         console.log(users.value);
@@ -23,7 +26,7 @@ const userController = () => {
 
   const registerUser = () => {
     axios
-      .post("http://localhost/DACN/dacn-vuejs/src/api/api.php", {
+      .post("http://localhost/dacn/src/api/api.php", {
         username: username.value,
         password: password.value,
         action: "register",
@@ -31,15 +34,16 @@ const userController = () => {
       .then((res) => {
         console.log(res.data);
         fetchUser();
-        router.push({ name: "home" });
+        router.push({ name: "home" }); // Redirect to home page after registration
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
   const loginUser = () => {
     axios
-      .post("http://localhost/DACN/dacn-vuejs/src/api/api.php", {
+      .post("http://localhost/dacn/src/api/api.php", {
         username: username.value,
         password: password.value,
         action: "login",
@@ -50,11 +54,11 @@ const userController = () => {
           fetchUser();
           // Clear login error on successful login
           errorLogin.value = "";
-          router.push({ name: "home" });
+          router.push({ name: "home" }); // Redirect to home page after successful login
         } else {
           // Set login error message
           errorLogin.value = "Invalid username or password.";
-        } //
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -72,4 +76,5 @@ const userController = () => {
     errorLogin,
   };
 };
+
 export default userController;

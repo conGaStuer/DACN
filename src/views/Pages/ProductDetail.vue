@@ -35,9 +35,7 @@
         <button class="add" @click="addtoCart">
           <i class="fa-brands fa-shopify"></i> Add to cart
         </button>
-        <div v-if="isAddedToCart" class="success-message">
-          Item added to cart successfully!
-        </div>
+
         <button class="buy">Buy Now</button>
       </div>
       <div class="something">
@@ -119,6 +117,8 @@ export default {
         .then((response) => {
           console.log(response.data);
           // Handle success, update UI, show notifications, etc.
+          const promptMessage = "Item added to cart successfully!";
+          window.alert(promptMessage);
         })
         .catch((error) => {
           console.error("Error adding to cart:", error);
