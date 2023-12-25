@@ -8,7 +8,9 @@
         <router-link to="/about"> ABOUT </router-link>
         <router-link to="/contact"> CONTACT </router-link>
       </div>
+
       <ul>
+        <li><router-link to="/login"> Login </router-link></li>
         <li><i class="fa-solid fa-magnifying-glass"></i></li>
         <li @click="showUser">
           <i class="fa-regular fa-user"></i>
@@ -34,23 +36,23 @@ export default {
     const showUser = () => {
       userr.value = !userr.value;
     };
-    // const checkLogin = () => {
-    //   axios
-    //     .get("http://localhost/DACN/dacn-vuejs/src/api/checkLogin.php")
-    //     .then((res) => {
-    //       loggedUser.value = res.data.user;
-    //       console.log(res.data);
-    //     })
-    //     .catch((err) => console.error(err));
-    // };
-    // onMounted(() => {
-    //   checkLogin();
-    // });
+    const checkLogin = () => {
+      axios
+        .get("http://localhost/DACN/dacn-vuejs/src/api/api.php")
+        .then((res) => {
+          loggedUser.value = res.data.user;
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    };
+    onMounted(() => {
+      checkLogin();
+    });
     return {
       userr,
       showUser,
       loggedUser,
-      // checkLogin,
+      checkLogin,
     };
   },
 };

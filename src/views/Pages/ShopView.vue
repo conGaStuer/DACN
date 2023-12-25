@@ -53,26 +53,14 @@
     <div class="filt-side">
       <div class="filter-text"><span>Filer Result</span></div>
       <div class="filter-product">
-        <div class="filter-product__item">
-          <button>x</button>
-          <span>Ipad</span>
-        </div>
-        <div class="filter-product__item">
-          <button>x</button>
-          <span>Phone</span>
-        </div>
-        <div class="filter-product__item">
-          <button>x</button>
-          <span>Pen</span>
-        </div>
-        <div class="filter-product__item">
-          <button>x</button>
-          <span>Keyboard</span>
-        </div>
-        <div class="filter-product__item">
-          <button>x</button>
-          <span>Accessories</span>
-        </div>
+        <button @click="filterProduct('all')">All</button>
+        <button
+          v-for="tag in uniqueTags"
+          :key="tag"
+          @click="filterProduct(tag)"
+        >
+          {{ tag }}
+        </button>
       </div>
     </div>
     <div class="products-side">
@@ -122,16 +110,33 @@ export default {
   },
   setup() {
     const products = ref();
+    const uniqueTags = ref([]);
+    const filteredProducts = ref([]);
     const fetchProducts = () => {
       axios
-        .get("http://localhost/DACN/dacn-vuejs/src/api/products.php")
+        .get("http://localhost/dacn/src/api/products.php")
         .then((res) => {
           products.value = res.data;
           console.log(products.value);
+          uniqueTags.value = [
+            ...new Set(products.value.map((product) => product.maloai)),
+          ];
+          filteredProducts.value = products.value;
         })
         .catch((err) => {
           console.log("Error fetching data", err);
         });
+    };
+    const filterProduct = (tag) => {
+      if (tag === "all") {
+        // If 'All' tag is selected, show all products
+        filteredProducts.value = products.value;
+      } else {
+        // Filter products based on the selected tag
+        filteredProducts.value = products.value.filter(
+          (product) => product.maloai === tag
+        );
+      }
     };
     onMounted(() => {
       fetchProducts();
@@ -139,6 +144,9 @@ export default {
     return {
       products,
       fetchProducts,
+      uniqueTags,
+      filteredProducts,
+      filterProduct,
     };
   },
 };

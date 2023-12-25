@@ -32,9 +32,12 @@
         </ul>
       </div>
       <div class="product-handle">
-        <button class="add">
+        <button class="add" @click="addtoCart">
           <i class="fa-brands fa-shopify"></i> Add to cart
         </button>
+        <div v-if="isAddedToCart" class="success-message">
+          Item added to cart successfully!
+        </div>
         <button class="buy">Buy Now</button>
       </div>
       <div class="something">
@@ -101,13 +104,32 @@ export default {
     const product = ref({});
     const route = useRoute();
     const products = ref([]);
+    const isAddedToCart = ref(false);
+    const addtoCart = () => {
+      // Assuming product has the required information
+      const cartItem = {
+        masp: product.value.masp,
+        tensp: product.value.tensp,
+        hinhanh: product.value.hinhanh,
+        gia: product.value.gia,
+      };
+
+      axios
+        .post("http://localhost/dacn/src/api/addToCart.php", cartItem)
+        .then((response) => {
+          console.log(response.data);
+          // Handle success, update UI, show notifications, etc.
+        })
+        .catch((error) => {
+          console.error("Error adding to cart:", error);
+          // Handle errors, show error messages, etc.
+        });
+    };
     onMounted(() => {
       const productId = route.params.id;
 
       axios
-        .get(
-          `http://localhost/DACN/dacn-vuejs/src/api/products.php/${productId}`
-        )
+        .get(`http://localhost/dacn/src/api/products.php/${productId}`)
         .then((res) => {
           product.value = res.data;
         })
@@ -122,6 +144,8 @@ export default {
     return {
       product,
       products,
+      addtoCart,
+      isAddedToCart,
     };
   },
 };

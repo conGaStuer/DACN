@@ -1,25 +1,26 @@
 <?php
-
 include(__DIR__ . "/config.php");
-include(__DIR__ . "/api.php");
+// Start the session
+session_start();
 
-print_r($_SESSION);
-function checkLogin() {
-    if(isset($_SESSION['user'])) {
-        return $_SESSION['user'] ;
-    } else {
-        return null;
-    }
+// Check if a user is logged in
+if (isset($_SESSION['user'])) {
+    // User is logged in
+    $response = array(
+        'user' => $_SESSION['user'],
+        'loggedIn' => true
+    );
+} else {
+    // User is not logged in
+    $response = array(
+        'user' => null,
+        'loggedIn' => false
+    );
 }
 
+// Set the content type header to application/json
+header('Content-Type: application/json');
 
-
-if($_SERVER["REQUEST_METHOD"] == "GET") {
-    $loggedUser = checkLogin();
-    if ($loggedUser) {
-        echo json_encode(array("user" => $loggedUser));
-    } else {
-        echo json_encode(array("user" => null));
-    }
-} 
-
+// Encode the response as JSON and output it
+echo json_encode($response);
+?>
