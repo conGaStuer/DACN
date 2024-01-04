@@ -7,6 +7,9 @@
   <div class="banner"></div>
   <div>
     <h2>Your Shopping Cart</h2>
+    <h4>
+      <router-link to="/order">Order Status</router-link>
+    </h4>
     <table class="cart-table">
       <thead>
         <tr>
@@ -130,7 +133,7 @@ export default {
       });
 
       axios
-        .post("http://localhost/dacn/src/api/order.php", {
+        .post("http://localhost/dacn/src/api/createOrder.php", {
           cartItems: cartItemsToSend,
         })
         .then((response) => {
@@ -138,7 +141,7 @@ export default {
           if (response.data.message === "Order placed successfully") {
             // Assuming you want to redirect to a thank you page
             // You can replace this with your own redirection logic
-            window.location.href = "/thank-you";
+            window.location.href = "/shop";
           } else {
             console.error("Error placing the order");
           }

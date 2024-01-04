@@ -1,11 +1,18 @@
 <template>
   <div>
     <h2>
-      {{ activeTab === "products" ? "Product Management" : "User Management" }}
+      {{
+        activeTab === "products"
+          ? "Product Management"
+          : activeTab === "users"
+          ? "User Management"
+          : "Order Management"
+      }}
     </h2>
     <div>
       <button @click="switchTab('products')">Manage Products</button>
       <button @click="switchTab('users')">Manage Users</button>
+      <button @click="switchTab('orders')">Manage Orders</button>
     </div>
     <button v-if="activeTab === 'products'" @click="addNewProduct">
       Add New Item
@@ -61,18 +68,47 @@
         </tr>
       </tbody>
     </table>
+    <table class="order-table" v-if="activeTab === 'orders'" border="1">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Total Amount</th>
+          <th>Customer ID</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="order in orders" :key="order.madh">
+          <td>{{ order.madh }}</td>
+          <td>{{ order.tongtien }}</td>
+          <td>{{ order.maKH }}</td>
+          <td>
+            <button @click="showOrderDetails(order)">View Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <admin-order-details
+      v-if="activeTab === 'orders'"
+      :orderDetails="selectedOrderDetails"
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import AdminOrderDetails from "./AdminOrderDetails.vue";
 export default {
+  components: {
+    AdminOrderDetails,
+  },
   data() {
     return {
       activeTab: "products",
       products: [],
       users: [],
+      orders: [],
+      selectedOrderDetails: [],
     };
   },
   mounted() {
@@ -83,21 +119,42 @@ export default {
       this.activeTab = tab;
       this.fetchData();
     },
-
+    fetchProducts() {
+      axios
+        .get("http://localhost/dacn/src/api/adminProduct.php")
+        .then((response) => {
+          this.products = response.data;
+        });
+    },
+    fetchOrders() {
+      axios
+        .get("http://localhost/dacn/src/api/adminOrder.php")
+        .then((response) => {
+          this.orders = response.data;
+        });
+    },
     fetchData() {
       if (this.activeTab === "users") {
-        // Make a GET request to manageUsers.php to fetch users
         axios
           .get("http://localhost/dacn/src/api/manageUser.php")
           .then((response) => {
             this.users = response.data;
           });
+      } else if (this.activeTab === "orders") {
+        this.fetchOrders();
       } else {
-        // Make a GET request to adminProduct.php to fetch products
         this.fetchProducts();
       }
     },
-
+    showOrderDetails(order) {
+      axios
+        .get(
+          `http://localhost/dacn/src/api/AdminOrderDetails.php?orderId=${order.madh}`
+        )
+        .then((response) => {
+          this.selectedOrderDetails = response.data;
+        });
+    },
     fetchProducts() {
       // Make a GET request to the adminProduct.php file to fetch products
       axios
