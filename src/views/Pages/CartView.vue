@@ -136,7 +136,7 @@ export default {
         .then((response) => {
           console.log("Server response:", response.data);
           if (response.data.message === "Order placed successfully") {
-            window.location.href = "/shop";
+            window.location.href = "/order";
           } else {
             console.error("Error placing the order");
           }

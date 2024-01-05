@@ -9,7 +9,7 @@ if ($data->action == 'cancel') {
 
 
     $query1 = "DELETE FROM donhang WHERE madh = :orderId";
-    $query2 = "DELETE FROM chitietdonhang WHERE madh = :orderId";
+    $query2 = "DELETE FROM chiteitdonhang WHERE madh = :orderId";
 
     $stmt1 = $pdo->prepare($query1);
     $stmt2 = $pdo->prepare($query2);

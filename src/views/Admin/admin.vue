@@ -126,31 +126,40 @@ export default {
       this.fetchData();
     },
     approveOrder(orderId) {
-      axios
-        .post("http://localhost/dacn/src/api/approveOrder.php", {
-          action: "approve",
-          orderId,
-        })
-        .then((response) => {
-          console.log(response.data.message);
+      // Sử dụng hộp thoại xác nhận để đảm bảo người dùng muốn thực hiện approve
+      const confirmApprove = window.confirm(
+        "Are you sure you want to approve this order?"
+      );
 
-          if (response.data.success) {
-            const approvedOrderIndex = this.orders.findIndex(
-              (order) => order.madh === orderId
-            );
-            if (approvedOrderIndex !== -1) {
-              this.orders[approvedOrderIndex].order_status = "Delivering";
-              console.log(`Order ${orderId} status updated to Delivering`);
+      if (confirmApprove) {
+        axios
+          .post("http://localhost/dacn/src/api/approveOrder.php", {
+            action: "approve",
+            orderId,
+          })
+          .then((response) => {
+            console.log(response.data.message);
+
+            if (response.data.success) {
+              const approvedOrderIndex = this.orders.findIndex(
+                (order) => order.madh === orderId
+              );
+              if (approvedOrderIndex !== -1) {
+                this.orders[approvedOrderIndex].order_status = "Delivering";
+                console.log(`Order ${orderId} status updated to Delivering`);
+                console.log(this.orders); // In ra để kiểm tra
+                this.fetchOrders();
+              } else {
+                console.log(`Order ${orderId} not found in orders array`);
+              }
             } else {
-              console.log(`Order ${orderId} not found in orders array`);
+              console.error("Error approving order:", response.data.error);
             }
-          } else {
-            console.error("Error approving order:", response.data.error);
-          }
-        })
-        .catch((error) => {
-          console.error("Error approving order:", error);
-        });
+          })
+          .catch((error) => {
+            console.error("Error approving order:", error);
+          });
+      }
     },
 
     fetchProducts() {

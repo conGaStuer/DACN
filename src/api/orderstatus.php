@@ -1,19 +1,13 @@
 <?php
+session_start();
+include(__DIR__ . "/config.php");
+// Truy vấn để lấy trạng thái từ bảng chitietdonhang
+$query = "SELECT madh, order_status FROM chiteitdonhang";
 
-$conn = new mysqli("localhost", "username", "password", "database");
-
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
-$query = "SELECT madh, order_status FROM chitietdonhang";
-
-
+// Thực hiện truy vấn
 $result = $conn->query($query);
 
-
+// Kiểm tra và trả về dữ liệu dưới dạng JSON
 if ($result->num_rows > 0) {
     $data = array();
     while ($row = $result->fetch_assoc()) {
@@ -21,9 +15,9 @@ if ($result->num_rows > 0) {
     }
     echo json_encode($data);
 } else {
-    echo "No data found.";
+    echo json_encode(array("message" => "No data found."));
 }
 
-
+// Đóng kết nối
 $conn->close();
 ?>

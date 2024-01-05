@@ -8,6 +8,7 @@
           <th>Product Name</th>
           <th>Quantity</th>
           <th>Price</th>
+          <th>Image</th>
         </tr>
       </thead>
       <tbody>
@@ -16,6 +17,13 @@
           <td>{{ detail.tensp }}</td>
           <td>{{ detail.soluong }}</td>
           <td>{{ detail.gia }}</td>
+          <td>
+            <img
+              :src="detail.hinhanh"
+              alt="Product Image"
+              style="max-width: 100px; max-height: 100px"
+            />
+          </td>
         </tr>
       </tbody>
     </table>

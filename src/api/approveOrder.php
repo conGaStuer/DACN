@@ -2,58 +2,34 @@
 session_start();
 include(__DIR__ . "/config.php");
 
+// Lấy thông tin từ request
+$data = json_decode(file_get_contents("php://input"), true); // Decode as associative array
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if (isset($data['action'], $data['orderId']) && $data['action'] === "approve") {
+  try {
+    $orderId = $data['orderId'];
 
-  $requestData = json_decode(file_get_contents("php://input"), true);
+    // Kiểm tra và thực hiện cập nhật trạng thái
+    $updateStatusQuery = "UPDATE chiteitdonhang SET order_status = 'Delivering' WHERE madh = ?";
+    $stmtUpdateStatus = $conn->prepare($updateStatusQuery);
+    $stmtUpdateStatus->bind_param('i', $orderId);
 
-
-  if ($requestData["action"] === "approve") {
-
-    $orderId = $requestData["orderId"];
-
-
-    $success = updateOrderStatus($conn, $orderId, "Delivering");
-
-    if ($success) {
-
-      echo json_encode(["success" => true, "message" => "Order approved successfully"]);
+    if ($stmtUpdateStatus->execute()) {
+      echo json_encode(array("success" => true, "message" => "Order approved successfully"));
     } else {
-
-      echo json_encode(["success" => false, "error" => "Failed to approve order"]);
+      throw new Exception("Failed to update order status");
     }
-  } else {
-
-    echo json_encode(["success" => false, "error" => "Invalid action"]);
+  } catch (Exception $e) {
+    error_log($e->getMessage());
+    echo json_encode(array("success" => false, "error" => $e->getMessage()));
+  } finally {
+    // Đảm bảo đóng kết nối dù có lỗi hay không
+    if ($stmtUpdateStatus) {
+      $stmtUpdateStatus->close();
+    }
+    $conn->close();
   }
 } else {
-
-  echo json_encode(["success" => false, "error" => "Invalid request method"]);
-}
-
-
-function updateOrderStatus($conn, $orderId, $newStatus)
-{
-
-  if (!isset($conn) || !($conn instanceof mysqli)) {
-
-    return false;
-  }
-
-
-  $sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
-  $stmt = $conn->prepare($sql);
-
-  if (!$stmt) {
-
-    return false;
-  }
-
-  $stmt->bind_param("si", $newStatus, $orderId);
-  $result = $stmt->execute();
-
-
-  $stmt->close();
-  return $result;
+  echo json_encode(array("success" => false, "error" => "Invalid request"));
 }
 ?>

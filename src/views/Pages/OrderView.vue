@@ -15,6 +15,7 @@
           <th>Order status</th>
           <th>Total</th>
           <th>Invoice</th>
+          <th>Received Status</th>
         </tr>
       </thead>
       <tbody>
@@ -40,9 +41,11 @@
           <td>
             <button @click="printInvoice(orderDetail)">In hóa đơn</button>
           </td>
+          <td>{{ orderDetail.received_status }}</td>
         </tr>
       </tbody>
     </table>
+    <div class="total">Total Amount: {{ totalAmount }}</div>
   </div>
   <Footer></Footer>
 </template>
@@ -120,7 +123,7 @@ export default {
         case "cancelled":
           return "Cancelled";
         default:
-          return "Unknown";
+          return "Delivering";
       }
     },
     cancelOrder(orderId) {
@@ -136,10 +139,23 @@ export default {
         });
     },
   },
+  computed: {
+    totalAmount() {
+      // Sử dụng reduce để tính tổng số tiền từ mảng orderDetails
+      return this.orderDetails.reduce(
+        (total, orderDetail) => total + orderDetail.soluong * orderDetail.gia,
+        0
+      );
+    },
+  },
 };
 </script>
 
 <style>
+h2 {
+  position: relative;
+  top: 150px;
+}
 .order-table {
   width: 100%;
   border-collapse: collapse;
@@ -167,5 +183,9 @@ export default {
 .product-image {
   max-width: 100px;
   max-height: 100px;
+}
+.total {
+  position: relative;
+  top: 200px;
 }
 </style>
