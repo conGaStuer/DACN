@@ -84,6 +84,12 @@
           <td>{{ order.maKH }}</td>
           <td>
             <button @click="showOrderDetails(order)">View Details</button>
+            <button
+              @click="approveOrder(order.madh)"
+              :disabled="order.order_status !== 'Pending'"
+            >
+              Approve
+            </button>
           </td>
         </tr>
       </tbody>
@@ -119,6 +125,34 @@ export default {
       this.activeTab = tab;
       this.fetchData();
     },
+    approveOrder(orderId) {
+      axios
+        .post("http://localhost/dacn/src/api/approveOrder.php", {
+          action: "approve",
+          orderId,
+        })
+        .then((response) => {
+          console.log(response.data.message);
+
+          if (response.data.success) {
+            const approvedOrderIndex = this.orders.findIndex(
+              (order) => order.madh === orderId
+            );
+            if (approvedOrderIndex !== -1) {
+              this.orders[approvedOrderIndex].order_status = "Delivering";
+              console.log(`Order ${orderId} status updated to Delivering`);
+            } else {
+              console.log(`Order ${orderId} not found in orders array`);
+            }
+          } else {
+            console.error("Error approving order:", response.data.error);
+          }
+        })
+        .catch((error) => {
+          console.error("Error approving order:", error);
+        });
+    },
+
     fetchProducts() {
       axios
         .get("http://localhost/dacn/src/api/adminProduct.php")
@@ -130,7 +164,10 @@ export default {
       axios
         .get("http://localhost/dacn/src/api/adminOrder.php")
         .then((response) => {
-          this.orders = response.data;
+          this.orders = response.data.map((order) => ({
+            ...order,
+            order_status: "Pending",
+          }));
         });
     },
     fetchData() {
@@ -156,7 +193,6 @@ export default {
         });
     },
     fetchProducts() {
-      // Make a GET request to the adminProduct.php file to fetch products
       axios
         .get("http://localhost/dacn/src/api/adminProduct.php")
         .then((response) => {
@@ -171,7 +207,6 @@ export default {
       const manufacturerId = prompt("Enter manufacturer ID:");
       const price = prompt("Enter price:");
 
-      // Make a POST request to addProduct.php with the new product information
       axios
         .post("http://localhost/dacn/src/api/addProduct.php", {
           action: "add",
@@ -184,13 +219,11 @@ export default {
         .then((response) => {
           console.log(response.data.message);
 
-          // Refresh the product list after adding a new product
           this.fetchProducts();
         });
     },
 
     editProduct(product) {
-      // Implement the logic for editing a product
       const newProductName = prompt("Enter new product name:", product.tensp);
       const newCategoryId = prompt("Enter new category ID:", product.maloai);
       const newImage = prompt("Enter new image URL:", product.hinhanh);
@@ -200,7 +233,6 @@ export default {
       );
       const newPrice = prompt("Enter new price:", product.gia);
 
-      // Make a POST request to editProduct.php with the updated information
       axios
         .post("http://localhost/dacn/src/api/editProduct.php", {
           action: "edit",
@@ -214,12 +246,10 @@ export default {
         .then((response) => {
           console.log(response.data.message);
 
-          // Refresh the product list after editing
           this.fetchProducts();
         });
     },
     deleteProduct(productId) {
-      // Confirm with the user before deleting the product
       const confirmDelete = window.confirm(
         "Are you sure you want to delete this product?"
       );
@@ -227,7 +257,6 @@ export default {
         return;
       }
 
-      // Make a POST request to delete.php with the product ID
       axios
         .post("http://localhost/dacn/src/api/deleteProduct.php", {
           action: "delete",
@@ -236,12 +265,10 @@ export default {
         .then((response) => {
           console.log(response.data.message);
 
-          // Refresh the product list after deleting the product
           this.fetchProducts();
         });
     },
     deleteUser(userId) {
-      // Confirm with the user before deleting
       const confirmDelete = window.confirm(
         "Are you sure you want to delete this user?"
       );
@@ -249,7 +276,6 @@ export default {
         return;
       }
 
-      // Make a POST request to deleteUser.php with the user ID
       axios
         .post("http://localhost/dacn/src/api/deleteUser.php", {
           action: "delete",
@@ -258,7 +284,6 @@ export default {
         .then((response) => {
           console.log(response.data.message);
 
-          // Refresh the user list after deleting the user
           this.fetchData();
         });
     },
@@ -267,7 +292,6 @@ export default {
 </script>
 
 <style>
-/* Add your CSS styles here */
 .product-table {
   width: 100%;
   border-collapse: collapse;

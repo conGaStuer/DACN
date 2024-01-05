@@ -1,11 +1,11 @@
 <?php
 include(__DIR__ . "/config.php");
 
-// Kiểm tra xem có orderId được cung cấp không
+
 if (isset($_GET['orderId'])) {
     $orderId = $_GET['orderId'];
 
-    // Truy vấn để lấy chi tiết đơn hàng dựa trên orderId
+
     $getOrderDetailsQuery = "SELECT * FROM chiteitdonhang WHERE madh = ?";
 
     $stmt = $conn->prepare($getOrderDetailsQuery);

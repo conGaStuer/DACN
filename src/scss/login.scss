@@ -89,7 +89,6 @@ section {
               border-left: none;
               border-right: none;
 
-              /* Giữ lại border ở phần dưới cùng */
               border-bottom: 1px solid #000;
               &::placeholder {
                 text-indent: 20px;
@@ -97,7 +96,6 @@ section {
                 border-left: none;
                 border-right: none;
 
-                /* Giữ lại border ở phần dưới cùng */
                 border-bottom: 1px solid #000;
               }
             }

@@ -129,10 +129,8 @@ export default {
     };
     const filterProduct = (tag) => {
       if (tag === "all") {
-        // If 'All' tag is selected, show all products
         filteredProducts.value = products.value;
       } else {
-        // Filter products based on the selected tag
         filteredProducts.value = products.value.filter(
           (product) => product.maloai === tag
         );

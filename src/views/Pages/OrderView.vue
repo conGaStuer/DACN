@@ -13,6 +13,8 @@
           <th>Image</th>
           <th>Delete</th>
           <th>Order status</th>
+          <th>Total</th>
+          <th>Invoice</th>
         </tr>
       </thead>
       <tbody>
@@ -33,7 +35,11 @@
               Cancel
             </button>
           </td>
-          <td>Cho xac nhan</td>
+          <td>{{ getOrderStatus(orderDetail.order_status) }}</td>
+          <td>{{ calculateTotal(orderDetail) }}</td>
+          <td>
+            <button @click="printInvoice(orderDetail)">In hóa đơn</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -56,11 +62,9 @@ export default {
     };
   },
   mounted() {
-    // Gọi API để lấy tất cả chi tiết đơn hàng
     this.fetchOrderDetails();
   },
   methods: {
-    // ... (các phương thức khác)
     confirmCancelOrder(orderId) {
       const confirmCancel = window.confirm(
         "Are you sure you want to cancel this order?"
@@ -70,12 +74,35 @@ export default {
         this.cancelOrder(orderId);
       }
     },
+    calculateTotal(orderDetail) {
+      return orderDetail.soluong * orderDetail.gia;
+    },
+    printInvoice(orderDetail) {
+      const invoiceContent = this.generateInvoiceContent(orderDetail);
+
+      window.open().document.write(`<pre>${invoiceContent}</pre>`);
+    },
+    generateInvoiceContent(orderDetail) {
+      const invoiceText = `
+        Invoice for Order ID: ${orderDetail.madh}
+
+        Order Details:
+        Product ID: ${orderDetail.masp}
+        Quantity: ${orderDetail.soluong}
+        Price: ${orderDetail.gia}
+        Total: ${orderDetail.soluong * orderDetail.gia}
+
+
+
+        Order Status: ${this.getOrderStatus(orderDetail.order_status)}
+      `;
+
+      return invoiceText;
+    },
     fetchOrderDetails() {
-      // Gọi API hoặc bất kỳ logic nào bạn muốn để lấy chi tiết đơn hàng
-      // Ví dụ:
       axios
         .get("http://localhost/dacn/src/api/order.php", {
-          params: { orderId: this.selectedOrderId }, // Thay đổi params tùy thuộc vào API của bạn
+          params: { orderId: this.selectedOrderId },
         })
         .then((response) => {
           this.orderDetails = response.data;
@@ -83,6 +110,18 @@ export default {
         .catch((error) => {
           console.error("Error fetching order details:", error);
         });
+    },
+    getOrderStatus(status) {
+      switch (status) {
+        case "pending":
+          return "Pending";
+        case "approved":
+          return "Approved";
+        case "cancelled":
+          return "Cancelled";
+        default:
+          return "Unknown";
+      }
     },
     cancelOrder(orderId) {
       axios
@@ -92,8 +131,8 @@ export default {
         })
         .then((response) => {
           console.log(response.data.message);
-          // Refresh the order details after canceling the order
-          this.fetchOrderDetails(); // Hãy chắc chắn rằng bạn có một phương thức để fetch dữ liệu đơn hàng
+
+          this.fetchOrderDetails();
         });
     },
   },
@@ -101,7 +140,6 @@ export default {
 </script>
 
 <style>
-/* Thêm CSS nếu cần */
 .order-table {
   width: 100%;
   border-collapse: collapse;

@@ -1,5 +1,3 @@
-// userController.js
-
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import router from "@/router"; // Import Vue Router
@@ -52,11 +50,10 @@ const userController = () => {
         console.log(res.data);
         if (res.data.message === "Login successful.") {
           fetchUser();
-          // Clear login error on successful login
+
           errorLogin.value = "";
           router.push({ name: "home" }); // Redirect to home page after successful login
         } else {
-          // Set login error message
           errorLogin.value = "Invalid username or password.";
         }
       })

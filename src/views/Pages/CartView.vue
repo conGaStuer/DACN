@@ -74,19 +74,16 @@ export default {
         });
     };
     const incrementQuantity = (item) => {
-      // Implement logic to increment quantity
       updateQuantity(item, item.soluong + 1);
     };
 
     const decrementQuantity = (item) => {
-      // Implement logic to decrement quantity
       if (item.soluong > 1) {
         updateQuantity(item, item.soluong - 1);
       }
     };
 
     const deleteItem = (item) => {
-      // Implement logic to delete item
       axios
         .post("http://localhost/dacn/src/api/deleteCart.php", {
           masp: item.masp,
@@ -139,8 +136,6 @@ export default {
         .then((response) => {
           console.log("Server response:", response.data);
           if (response.data.message === "Order placed successfully") {
-            // Assuming you want to redirect to a thank you page
-            // You can replace this with your own redirection logic
             window.location.href = "/shop";
           } else {
             console.error("Error placing the order");
@@ -167,7 +162,6 @@ export default {
 </script>
 
 <style>
-/* Add your styles for the cart table */
 h2 {
   position: relative;
   top: 100px;

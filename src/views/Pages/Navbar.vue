@@ -53,7 +53,7 @@ export default {
         .then((res) => {
           if (res.data.message === "Logout successful") {
             loggedUser.value = null;
-            // Redirect to the login page or another appropriate page
+
             router.push({ name: "login" });
           }
         })

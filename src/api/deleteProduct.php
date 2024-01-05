@@ -1,14 +1,14 @@
 <?php
 include(__DIR__ . "/config.php");
 
-// Check if the request method is POST
+
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $data = json_decode(file_get_contents("php://input"));
 
     if (isset($data->action) && $data->action === 'delete') {
         $productId = $data->productId;
 
-        // Delete the product from the database
+
         $stmt = $conn->prepare("DELETE FROM sanpham WHERE masp = ?");
         $stmt->bind_param("i", $productId);
 

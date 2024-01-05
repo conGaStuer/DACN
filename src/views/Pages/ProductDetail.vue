@@ -104,7 +104,6 @@ export default {
     const products = ref([]);
     const isAddedToCart = ref(false);
     const addtoCart = () => {
-      // Assuming product has the required information
       const cartItem = {
         masp: product.value.masp,
         tensp: product.value.tensp,
@@ -116,13 +115,12 @@ export default {
         .post("http://localhost/dacn/src/api/addToCart.php", cartItem)
         .then((response) => {
           console.log(response.data);
-          // Handle success, update UI, show notifications, etc.
+
           const promptMessage = "Item added to cart successfully!";
           window.alert(promptMessage);
         })
         .catch((error) => {
           console.error("Error adding to cart:", error);
-          // Handle errors, show error messages, etc.
         });
     };
     onMounted(() => {

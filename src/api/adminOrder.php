@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/config.php");
 
-// Get orders and order details from the database
+
 $ordersQuery = "SELECT * FROM donhang";
 $ordersResult = $conn->query($ordersQuery);
 
@@ -12,7 +12,7 @@ if ($ordersResult->num_rows > 0) {
     while ($row = $ordersResult->fetch_assoc()) {
         $orderId = $row['madh'];
 
-        // Get order details for each order
+
         $orderDetailsQuery = "SELECT * FROM chiteitdonhang WHERE madh = $orderId";
         $orderDetailsResult = $conn->query($orderDetailsQuery);
 
@@ -26,7 +26,7 @@ if ($ordersResult->num_rows > 0) {
     }
 }
 
-// Return the orders and order details as JSON
+
 echo json_encode($orders);
 
 $conn->close();

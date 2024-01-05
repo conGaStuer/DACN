@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/config.php");
 
-// Check if the request method is POST
+
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $data = json_decode(file_get_contents("php://input"));
 
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         $newManufacturerId = $data->newManufacturerId;
         $newPrice = $data->newPrice;
 
-        // Update the product in the database
+
         $stmt = $conn->prepare("UPDATE sanpham SET tensp=?, maloai=?, hinhanh=?, mansx=?, gia=? WHERE masp=?");
         $stmt->bind_param("sssisi", $newProductName, $newCategoryId, $newImage, $newManufacturerId, $newPrice, $productId);
 

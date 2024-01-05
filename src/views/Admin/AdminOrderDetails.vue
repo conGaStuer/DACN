@@ -30,9 +30,28 @@ export default {
       default: () => [],
     },
   },
+  methods: {
+    approveOrder(orderId) {
+      const confirmApprove = window.confirm(
+        "Are you sure you want to approve this order?"
+      );
+      if (!confirmApprove) {
+        return;
+      }
+
+      axios
+        .post("http://localhost/dacn/src/api/approveOrder.php", {
+          action: "approve",
+          orderId,
+        })
+        .then((response) => {
+          console.log(response.data.message);
+
+          this.fetchOrders();
+        });
+    },
+  },
 };
 </script>
 
-<style>
-/* ... (styles for order details) ... */
-</style>
+<style></style>
